@@ -1,0 +1,18 @@
+{% import "templates/StaticDisplay.njk" as staticDisplay with context %}
+{% import "templates/ListDisplay.njk" as listDisplay with context %}
+{% if stations.length > 0 %}
+  <div class="normal medium fuel-wrapper{% if config.displayMode == "static" %} fuel-static{% endif %} fuel-wrapper-{{config.borderStyle}}" style="max-width: {{config.maxWidth}};">
+    {% if config.displayMode == "static" %}
+      {{ staticDisplay.render() }}
+    {% else %}
+      {{ listDisplay.render() }}
+    {% endif %}
+    {% if config.showLastUpdate %}
+      <div class="fuel-last-update">Last updated: {{ lastUpdate }}</div>
+    {% endif %}
+  </div>
+{% else %}
+    <div class="dimmed light small">
+      {{ "LOADING" | translate | safe }}
+    </div>
+{% endif %}

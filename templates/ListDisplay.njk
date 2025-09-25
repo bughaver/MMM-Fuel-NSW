@@ -1,0 +1,29 @@
+{% macro render() %}
+  <ul class="fuel-alignment-{{config.alignment}}">
+    {% for station in stations %}
+      <li class="fuel-station fuel-station-{{config.borderStyle}}">
+        <div class="fuel-station-header">
+          {% if config.showLogo and station.logoUrl %}
+            <img class="fuel-logo" src="{{ station.logoUrl }}" alt="{{ station.brand }}" />
+          {% endif %}
+          <span class="fuel-station-name">{{ utils.getStationName(station) }}</span>
+        </div>
+        <div class="fuel-station-details">
+          <span class="fuel-list-price">{{ utils.getPrice(station) }}</span>
+          {% if config.showFuelType %}
+            <span class="fuel-list-type">{{ utils.getFuelType(station) }}</span>
+          {% endif %}
+          {% if config.showDistance %}
+            <span class="fuel-list-distance">{{ utils.getDistance(station) }}</span>
+          {% endif %}
+          {% if config.showOpenStatus %}
+            <span class="fuel-list-status {{ 'open' if station.isOpenNow else 'closed' }} {{ 'closing-soon' if station.isClosingSoon }}">{{ utils.getOpenStatus(station) }}</span>
+          {% endif %}
+        </div>
+        {% if config.showAddress %}
+          <div class="fuel-list-address">{{ station.address }}</div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

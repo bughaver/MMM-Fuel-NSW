@@ -1,0 +1,23 @@
+{% macro render() %}
+  <table class="fuel-static-table">
+    <tbody>
+      {% for station in stations %}
+        <tr class="fuel-station-row">
+          <td class="fuel-logo-cell">
+            {% if station.logoUrl %}
+              <img class="fuel-static-logo" src="{{ station.logoUrl }}" alt="{{ station.logoUrl }}" />
+            {% endif %}
+          </td>
+          <td class="fuel-static-station-location">{{ station.location }}</td>
+          <td class="fuel-static-price{% if station.isClosingSoon %} closing-soon{% elif not station.isOpenNow %} closed{% endif %}">{{ utils.getPrice(station) }}</td>
+          {% if config.showFuelType %}
+          <td class="fuel-static-type">{{ utils.getFuelType(station) }}</td>
+          {% endif %}
+          {% if config.showDistance %}
+          <td class="fuel-static-distance">{{ utils.getDistance(station) }}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endmacro %}

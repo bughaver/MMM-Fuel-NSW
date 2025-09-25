@@ -1,0 +1,17 @@
+# Best practice: Use LF for all text files, CRLF for Windows-specific files
+* text=auto eol=lf
+
+# Windows batch/script files that need CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files (never convert line endings)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary

@@ -1,0 +1,86 @@
+{
+  "name": "mmm-fuel-nsw",
+  "version": "1.0.0",
+  "description": "A MagicMirror² module to display fuel prices from New South Wales, Australia.",
+  "main": "MMM-Fuel-NSW.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bughaver/MMM-Fuel-NSW.git"
+  },
+  "keywords": [
+    "magicmirror",
+    "fuel",
+    "prices",
+    "nsw",
+    "australia"
+  ],
+  "author": "[Author]",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bughaver/MMM-Fuel-NSW/issues"
+  },
+  "homepage": "https://github.com/bughaver/MMM-Fuel-NSW#readme",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "rollup -c --bundleConfigAsCjs",
+    "dev": "rollup -c --sourcemap=inline --bundleConfigAsCjs",
+    "dev:watch": "npm run dev -- --watch",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
+    "test": "jest",
+    "prepare": "husky",
+    "get-valid-data": "node scripts/get-valid-data.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/magicmirror-module": "^2.16.5",
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "jest": "^30.2.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.4.2",
+    "rollup": "^4.39.0",
+    "rollup-plugin-banner2": "^1.3.1",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "ts-jest",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.ts",
+      "**/?(*.)+(spec|test).ts"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write",
+      "jest --findRelatedTests --passWithNoTests"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}

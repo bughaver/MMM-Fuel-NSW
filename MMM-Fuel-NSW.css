@@ -1,0 +1,316 @@
+/* ===== CSS CUSTOM PROPERTIES ===== */
+:root {
+  /* Shared colors */
+  --fuel-border-color: #ddd;
+  --fuel-bg-overlay: rgba(0, 0, 0, 0.1);
+  --fuel-text-secondary: #666;
+  --fuel-text-muted: #888;
+
+  /* Status colors */
+  --fuel-status-open: #28a745;
+  --fuel-status-closed: #dc3545;
+  --fuel-status-closing-soon: #ffc107;
+  --fuel-price-closed: #dc3545;
+  --fuel-price-closing-soon: #ff8c00;
+
+  /* Shared spacing */
+  --fuel-spacing-xs: 1px;
+  --fuel-spacing-sm: 2px;
+  --fuel-spacing-md: 5px;
+  --fuel-spacing-lg: 8px;
+  --fuel-spacing-xl: 10px;
+  --fuel-spacing-xxl: 20px;
+
+  /* Shared border radius */
+  --fuel-border-radius: 5px;
+  --fuel-status-border-radius: 3px;
+
+  /* List mode variables */
+  --fuel-list-text-primary: #ffffff;
+  --fuel-list-text-timestamp: #999;
+  --fuel-list-font-size-price: 1.2em;
+  --fuel-list-font-size-name: 1.1em;
+  --fuel-list-font-size-details: 0.9em;
+  --fuel-list-font-size-status: 0.8em;
+  --fuel-list-font-size-address: 0.8em;
+  --fuel-list-font-size-timestamp: 0.7em;
+  --fuel-list-logo-size: 30px;
+
+  /* Static mode variables */
+  --fuel-static-font-size: 1.1rem;
+  --fuel-static-line-height-multiplier: 1.2;
+  --fuel-static-logo-size: 20px;
+  --fuel-static-table-padding-y: 1px;
+  --fuel-static-table-padding-x: 4px;
+}
+
+/* ===== BASE STYLES ===== */
+.fuel-wrapper {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fuel-last-update {
+  font-size: var(--fuel-list-font-size-timestamp);
+  color: var(--fuel-list-text-timestamp);
+  text-align: center;
+  margin-top: var(--fuel-spacing-xl);
+}
+
+/* ===== LIST DISPLAY MODE ===== */
+.fuel-station {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--fuel-spacing-xl);
+}
+
+.fuel-station:last-child {
+  margin-bottom: 0;
+}
+
+/* List mode header */
+.fuel-station-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--fuel-spacing-md);
+}
+
+.fuel-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: var(--fuel-spacing-xl);
+}
+
+.fuel-station-name {
+  font-weight: bold;
+  font-size: var(--fuel-list-font-size-name);
+}
+
+/* List mode details */
+.fuel-station-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fuel-list-price {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--fuel-list-text-primary);
+}
+
+.fuel-list-type {
+  font-size: 1.1em;
+  color: var(--fuel-text-secondary);
+  font-weight: normal;
+}
+
+.fuel-list-distance {
+  font-size: 1.1em;
+  color: var(--fuel-text-secondary);
+}
+
+/* List mode status */
+.fuel-list-status {
+  font-size: var(--fuel-list-font-size-status);
+  padding: var(--fuel-spacing-xs) var(--fuel-spacing-md);
+  border-radius: var(--fuel-status-border-radius);
+  text-transform: uppercase;
+}
+
+.fuel-list-status.open {
+  background-color: var(--fuel-status-open);
+  color: var(--fuel-list-text-primary);
+}
+
+.fuel-list-status.closed {
+  background-color: var(--fuel-status-closed);
+  color: var(--fuel-list-text-primary);
+}
+
+.fuel-list-status.closing-soon {
+  background-color: var(--fuel-status-closing-soon);
+  color: black;
+}
+
+/* List mode address */
+.fuel-list-address {
+  font-size: var(--fuel-list-font-size-address);
+  color: var(--fuel-text-muted);
+  margin-top: var(--fuel-spacing-md);
+}
+
+/* ===== BORDER STYLES ===== */
+.fuel-station-individual {
+  border: 1px solid var(--fuel-border-color);
+  border-radius: var(--fuel-border-radius);
+  background-color: var(--fuel-bg-overlay);
+  padding: var(--fuel-spacing-xl);
+}
+
+.fuel-wrapper-all {
+  border: 1px solid var(--fuel-border-color);
+  border-radius: var(--fuel-border-radius);
+  background-color: var(--fuel-bg-overlay);
+  padding: var(--fuel-spacing-xl);
+}
+
+.fuel-wrapper-all ul {
+  margin: 0;
+  padding: 0;
+}
+
+.fuel-wrapper-all .fuel-station {
+  margin-bottom: var(--fuel-spacing-xxl);
+}
+
+.fuel-wrapper-all .fuel-station:last-child {
+  margin-bottom: 0;
+}
+
+.fuel-wrapper-all .fuel-last-update {
+  margin-top: var(--fuel-spacing-md);
+}
+
+.fuel-station-none {
+  padding: var(--fuel-spacing-xl);
+}
+
+/* ===== TEXT ALIGNMENT ===== */
+.fuel-alignment-left {
+  text-align: left;
+}
+
+.fuel-alignment-center {
+  text-align: center;
+}
+
+.fuel-alignment-right {
+  text-align: right;
+}
+
+.fuel-alignment-center .fuel-station-header {
+  justify-content: center;
+}
+
+.fuel-alignment-center .fuel-station-details {
+  justify-content: center;
+}
+
+.fuel-alignment-right .fuel-station-header {
+  justify-content: flex-end;
+}
+
+.fuel-alignment-right .fuel-station-details {
+  justify-content: flex-end;
+}
+
+/* ===== STATIC DISPLAY MODE ===== */
+.fuel-static {
+  font-size: var(--fuel-static-font-size);
+  line-height: calc(var(--fuel-static-font-size) * var(--fuel-static-line-height-multiplier));
+}
+
+.fuel-static ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* Static mode station overrides */
+.fuel-static .fuel-station {
+  display: block !important;
+  flex-direction: unset !important;
+  margin-bottom: 0 !important;
+  padding: var(--fuel-spacing-xs) 0;
+}
+
+.fuel-static .fuel-station-name {
+  font-weight: normal;
+  margin-right: var(--fuel-spacing-lg);
+  font-size: var(--fuel-static-font-size);
+}
+
+.fuel-static .fuel-static-price {
+  font-weight: bold;
+  margin-right: var(--fuel-spacing-lg);
+  font-size: var(--fuel-static-font-size);
+}
+
+.fuel-static .fuel-static-details {
+  font-size: var(--fuel-static-font-size);
+  color: var(--fuel-text-secondary);
+  vertical-align: top;
+}
+
+.fuel-static .fuel-static-logo {
+  width: var(--fuel-static-logo-size);
+  height: var(--fuel-static-logo-size);
+  margin-right: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.fuel-static .fuel-static-station-location {
+  font-weight: normal;
+  margin-right: var(--fuel-spacing-lg);
+  font-size: var(--fuel-static-font-size);
+}
+
+/* Static mode table */
+.fuel-static-table {
+  width: 100%;
+  border-collapse: collapse;
+  line-height: calc(var(--fuel-static-font-size) * var(--fuel-static-line-height-multiplier));
+  table-layout: auto;
+}
+
+.fuel-static-table td {
+  padding: var(--fuel-static-table-padding-y) var(--fuel-static-table-padding-x);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.fuel-static-table .fuel-logo-cell {
+  text-align: center;
+  width: 1%;
+}
+
+.fuel-static-table .fuel-static-station-location {
+  font-weight: normal;
+  text-align: left;
+  font-size: var(--fuel-static-font-size);
+}
+
+.fuel-static-table .fuel-static-price {
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+  font-size: var(--fuel-static-font-size);
+}
+
+.fuel-static-table .fuel-static-type {
+  color: var(--fuel-text-secondary);
+  text-align: center;
+  font-weight: normal;
+  font-size: var(--fuel-static-font-size);
+}
+
+.fuel-static-table .fuel-static-distance {
+  color: var(--fuel-text-secondary);
+  text-align: right;
+  font-size: var(--fuel-static-font-size);
+}
+
+/* ===== PRICE STATUS COLORS ===== */
+.fuel-list-price.closed,
+.fuel-static-price.closed {
+  color: var(--fuel-price-closed);
+}
+
+.fuel-list-price.closing-soon,
+.fuel-static-price.closing-soon {
+  color: var(--fuel-price-closing-soon);
+}
