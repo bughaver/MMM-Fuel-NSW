@@ -1,13 +1,15 @@
 {% macro render() %}
-  <table class="fuel-static-table">
+  <table class="fuel-static-table fuel-alignment-{{config.alignment}}">
     <tbody>
       {% for station in stations %}
         <tr class="fuel-station-row">
+          {% if config.showLogo %}
           <td class="fuel-logo-cell">
             {% if station.logoUrl %}
               <img class="fuel-static-logo" src="{{ station.logoUrl }}" alt="{{ station.logoUrl }}" />
             {% endif %}
           </td>
+          {% endif %}
           <td class="fuel-static-station-location">{{ station.location }}</td>
           <td class="fuel-static-price{% if station.isClosingSoon %} closing-soon{% elif not station.isOpenNow %} closed{% endif %}">{{ utils.getPrice(station) }}</td>
           {% if config.showFuelType %}

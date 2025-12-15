@@ -1,14 +1,14 @@
 {% macro render() %}
   <ul class="fuel-alignment-{{config.alignment}}">
     {% for station in stations %}
-      <li class="fuel-station fuel-station-{{config.borderStyle}}">
-        <div class="fuel-station-header">
+      <li class="fuel-station fuel-list fuel-station-{{config.borderStyle}}">
+        <div class="fuel-list-header">
           {% if config.showLogo and station.logoUrl %}
             <img class="fuel-logo" src="{{ station.logoUrl }}" alt="{{ station.brand }}" />
           {% endif %}
           <span class="fuel-station-name">{{ utils.getStationName(station) }}</span>
         </div>
-        <div class="fuel-station-details">
+        <div class="fuel-list-details">
           <span class="fuel-list-price">{{ utils.getPrice(station) }}</span>
           {% if config.showFuelType %}
             <span class="fuel-list-type">{{ utils.getFuelType(station) }}</span>
