@@ -161,7 +161,7 @@ To find the latitude and longitude coordinates for your location, you can use Go
 1. Open [Google Maps](https://maps.google.com) in your web browser
 2. Navigate to your desired location (home, work, etc.)
 3. Right-click on the exact location on the map
-4. Clicking the `latitude, longitude` (e.g., `-33.8688, 151.2093`) we'll copy it to your clipboard
+4. Clicking the `latitude, longitude` (e.g., `-33.8688, 151.2093`) will copy it to your clipboard
 
 Use these coordinates for the `lat` and `long` configuration options in your module setup.
 
