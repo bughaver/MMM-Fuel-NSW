@@ -26,7 +26,6 @@
   margin-top: var(--fuel-spacing-xl);
 }
 
-
 .fuel-wrapper .fuel-last-update {
   font-size: 0.7em;
 }
@@ -229,7 +228,8 @@
   height: calc(var(--size) * 0.7);
 }
 
-.MMM-Fuel-NSW .fuel-static.table th, td {
+.MMM-Fuel-NSW .fuel-static.table th,
+td {
   padding: 0 0;
 }
 
