@@ -1,28 +1,24 @@
 import * as NodeHelper from 'node_helper';
 import * as Log from 'logger';
 import { State } from '../types/State';
-import { BackendService } from './BackendService';
+import { BackendService } from './Service/BackendService';
+import { BackendRepository } from './Service/Repository/BackendRepository';
+import { BackendMapper } from './Service/Repository/Mapper/BackendMapper';
+import { FuelApiConnector } from './Service/Repository/Connector/FuelApiConnector';
 import { Config } from '../types/Config';
 
 module.exports = NodeHelper.create({
-  /**
-   * Backend service instance
-   */
   backendService: null as BackendService | null,
 
-  /**
-   * Initialize the helper
-   */
-  start() {
+  async start() {
     Log.log(`${this.name} helper method started...`);
-    this.backendService = new BackendService();
+
+    const fuelApiConnector = new FuelApiConnector();
+    const backendMapper = new BackendMapper();
+    const backendRepository = new BackendRepository(backendMapper, fuelApiConnector);
+    this.backendService = new BackendService(backendRepository);
   },
 
-  /**
-   * Handle incoming socket notifications
-   * @param notification The notification type
-   * @param payload The notification payload
-   */
   async socketNotificationReceived(notification: string, payload: Config) {
     if (notification.includes('FUEL_REQUEST')) {
       const identifier = notification.substring('FUEL_REQUEST'.length + 1);
@@ -40,7 +36,6 @@ module.exports = NodeHelper.create({
         this.sendSocketNotification(`FUEL_RESPONSE-${identifier}`, response);
       } catch (error) {
         Log.error('Error fetching fuel prices:', error);
-        // Send empty response or error state
         const response: State = {
           lastUpdate: Date.now(),
           stations: [],

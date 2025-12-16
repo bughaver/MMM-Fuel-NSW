@@ -1,11 +1,17 @@
-import { BackendService } from '../../src/backend/BackendService';
+import { BackendService } from '../../src/backend/Service/BackendService';
+import { BackendRepository } from '../../src/backend/Service/Repository/BackendRepository';
+import { BackendMapper } from '../../src/backend/Service/Repository/Mapper/BackendMapper';
+import { FuelApiConnector } from '../../src/backend/Service/Repository/Connector/FuelApiConnector';
 import { Config } from '../../src/types/Config';
 
 describe('MMM-Fuel-NSW E2E Tests', () => {
   let service: BackendService;
 
-  beforeAll(() => {
-    service = new BackendService();
+  beforeAll(async () => {
+    const fuelApiConnector = new FuelApiConnector();
+    const backendMapper = new BackendMapper();
+    const backendRepository = new BackendRepository(backendMapper, fuelApiConnector);
+    service = new BackendService(backendRepository);
   });
 
   describe('Real Fuel API Integration', () => {
@@ -15,9 +21,10 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         brands: [],
         radius: 2,
         sortBy: 'price',
-        lat: -33.93993412910857, // Sydney CBD coordinates
+        lat: -33.93993412910857,
         long: 151.1270892114922,
         limit: 3,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,
@@ -37,7 +44,6 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(result.length).toBeGreaterThan(0);
       expect(result.length).toBeLessThanOrEqual(3);
 
-      // Check structure of first station
       const station = result[0];
       expect(station).toHaveProperty('name');
       expect(station).toHaveProperty('brand');
@@ -49,7 +55,6 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(station).toHaveProperty('isOpenNow');
       expect(station).toHaveProperty('isClosingSoon');
 
-      // Check data types
       expect(typeof station.name).toBe('string');
       expect(typeof station.brand).toBe('string');
       expect(typeof station.location).toBe('string');
@@ -70,6 +75,7 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         lat: -33.93993412910857,
         long: 151.1270892114922,
         limit: 5,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,
@@ -89,7 +95,6 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(result.length).toBeGreaterThan(0);
       expect(result.length).toBeLessThanOrEqual(5);
 
-      // All stations should be BP
       result.forEach((station) => {
         expect(station.brand).toBe('BP');
       });
@@ -104,6 +109,7 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         lat: -33.93993412910857,
         long: 151.1270892114922,
         limit: 5,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,
@@ -123,7 +129,6 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(result.length).toBeGreaterThan(0);
       expect(result.length).toBeLessThanOrEqual(5);
 
-      // Check that results are sorted by distance (ascending)
       for (let i = 1; i < result.length; i++) {
         expect(result[i].distance).toBeGreaterThanOrEqual(result[i - 1].distance);
       }
@@ -138,6 +143,7 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         lat: -33.93993412910857,
         long: 151.1270892114922,
         limit: 5,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,
@@ -157,7 +163,6 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(result.length).toBeGreaterThan(0);
       expect(result.length).toBeLessThanOrEqual(5);
 
-      // Check that results are sorted by price (ascending)
       for (let i = 1; i < result.length; i++) {
         expect(result[i].price).toBeGreaterThanOrEqual(result[i - 1].price);
       }
@@ -171,9 +176,10 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         bottomLeftLongitude: 150,
         topRightLatitude: -33,
         topRightLongitude: 152,
-        radius: 5, // Add required radius
-        sortBy: 'price' as const, // Add required sortBy
+        radius: 5,
+        sortBy: 'price' as const,
         limit: 5,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,
@@ -203,6 +209,7 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         lat: -33.93993412910857,
         long: 151.1270892114922,
         limit: 3,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,
@@ -222,7 +229,6 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(result.length).toBeGreaterThan(0);
       expect(result.length).toBeLessThanOrEqual(3);
 
-      // All stations should have U91 fuel type
       result.forEach((station) => {
         expect(station.fieldType).toBe('U91');
       });
@@ -237,6 +243,7 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         lat: -33.93993412910857,
         long: 151.1270892114922,
         limit: 3,
+        distance: 10,
         updateIntervalInSeconds: 600,
         maxWidth: '100%',
         showDistance: true,

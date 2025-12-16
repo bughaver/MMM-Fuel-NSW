@@ -1,4 +1,5 @@
 import FrontendService from './FrontendService';
+import { Config } from '../types/Config';
 
 // Global or injected variable declarations
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,6 +13,10 @@ Module.register('MMM-Fuel-NSW', {
     brands: [],
     radius: 3,
     sortBy: 'price',
+    limit: 3,
+    distance: 10,
+    lat: -33.8688, // Sydney coordinates as example
+    long: 151.2093,
     updateIntervalInSeconds: 600,
     maxWidth: '100%',
     showDistance: true,
@@ -23,9 +28,6 @@ Module.register('MMM-Fuel-NSW', {
     showLastUpdate: true,
     displayMode: 'list',
     alignment: 'center',
-    lat: -33.8688, // Sydney coordinates as example
-    long: 151.2093,
-    limit: 3,
   },
 
   getScripts() {
@@ -70,7 +72,7 @@ Module.register('MMM-Fuel-NSW', {
   },
 
   loadData() {
-    this.sendSocketNotification(`FUEL_REQUEST-${this.identifier}`, this.config);
+    this.sendSocketNotification(`FUEL_REQUEST-${this.identifier}`, this.config as Config);
   },
 
   socketNotificationReceived(notificationIdentifier: string, payload: unknown) {

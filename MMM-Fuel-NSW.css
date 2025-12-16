@@ -1,173 +1,185 @@
 /* ===== CSS CUSTOM PROPERTIES ===== */
 :root {
-  /* Shared variables (used by both list and static modes) */
-  --fuel-border-color: #ddd;
-  --fuel-bg-overlay: rgba(0, 0, 0, 0.1);
-  --fuel-status-open: green;
-  --fuel-status-closed: red;
-  --fuel-status-closing-soon: #ff8c00;
-  --fuel-spacing-md: 5px;
-  --fuel-spacing-xl: 10px;
-  --fuel-spacing-xxl: 20px;
-  --fuel-border-radius: 5px;
+  /* Colors */
+  --color-primary: #ffffff;
+  --color-secondary: #666;
+  --color-muted: #888;
+  --color-timestamp: #999;
+  --status-open: green;
+  --status-closed: red;
+  --status-closing-soon: #ff8c00;
+  --border-color: #ddd;
+
+  /* Font Sizes */
+  --font-size-xs: 0.7em;
+  --font-size-sm: 0.8em;
+  --font-size-md: 0.9em;
+  --font-size-lg: 1.1em;
+  --font-size-xl: 1.2em;
+  --font-size-static: 1.4rem;
+
+  /* Spacing */
+  --spacing-xs: 1px;
+  --spacing-md: 5px;
+  --spacing-lg: 20px;
+  --spacing-xl: 10px;
+  --spacing-xxl: 20px;
+  --padding-zero: 0;
+  --margin-zero: 0;
+
+  /* Border */
+  --border-width: 1px;
+  --border-radius: 5px;
+  --status-border-radius: 3px;
+
+  /* Logo */
+  --logo-size: 30px;
+  --logo-size-small: 20px;
+  --logo-scale: 0.7;
+
+  /* Layout */
+  --gap: 12px;
+  --line-height-multiplier: 1.44;
 }
 
 /* ===== BASE STYLES ===== */
 .fuel-wrapper {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: var(--padding-zero);
+  margin: var(--margin-zero);
 }
 
 .fuel-last-update {
-  font-size: var(--fuel-list-font-size-timestamp);
-  color: var(--fuel-list-text-timestamp);
+  font-size: var(--font-size-xs);
+  color: var(--color-timestamp);
   text-align: center;
-  margin-top: var(--fuel-spacing-xl);
+  margin-top: var(--spacing-xl);
 }
 
 .fuel-wrapper .fuel-last-update {
-  font-size: 0.7em;
+  font-size: var(--font-size-xs);
 }
 
 /* Add more space between list items and last updated text in list mode */
 .fuel-wrapper:not(.fuel-static) .fuel-last-update {
-  margin-top: 20px;
+  margin-top: var(--spacing-lg);
 }
 
 /* ===== LIST DISPLAY MODE ===== */
 .fuel-list {
-  /* List mode variables */
-  --fuel-list-text-primary: #ffffff;
-  --fuel-list-text-timestamp: #999;
-  --fuel-list-text-secondary: #666;
-  --fuel-list-text-muted: #888;
-  --fuel-list-font-size-price: 1.2em;
-  --fuel-list-font-size-name: 1.1em;
-  --fuel-list-font-size-details: 0.9em;
-  --fuel-list-font-size-status: 0.8em;
-  --fuel-list-font-size-address: 0.8em;
-  --fuel-list-font-size-timestamp: 0.7em;
-  --fuel-list-logo-size: 30px;
-  --fuel-spacing-xs: 1px;
-  --fuel-status-border-radius: 3px;
-
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--fuel-spacing-xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .fuel-list:last-child {
-  margin-bottom: 0;
+  margin-bottom: var(--margin-zero);
 }
 
 /* List mode header */
 .fuel-list-header {
   display: flex;
   align-items: center;
-  margin-bottom: var(--fuel-spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .fuel-logo {
-  width: 30px;
-  height: 30px;
-  margin-right: var(--fuel-spacing-xl);
+  width: var(--logo-size);
+  height: var(--logo-size);
+  margin-right: var(--spacing-xl);
 }
 
 .fuel-station-name {
   font-weight: bold;
-  font-size: var(--fuel-list-font-size-name);
+  font-size: var(--font-size-lg);
 }
 
 /* List mode details */
 .fuel-list-details {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--gap);
   flex-wrap: wrap;
 }
 
 .fuel-list-price {
-  font-size: 1.1em;
+  font-size: var(--font-size-lg);
   font-weight: bold;
-  color: var(--fuel-list-text-primary);
+  color: var(--color-primary);
 }
 
 .fuel-list-type {
-  font-size: 1.1em;
-  color: var(--fuel-list-text-muted);
+  font-size: var(--font-size-lg);
+  color: var(--color-muted);
   font-weight: normal;
 }
 
 .fuel-list-distance {
-  font-size: 1.1em;
-  color: var(--fuel-list-text-muted);
+  font-size: var(--font-size-lg);
+  color: var(--color-muted);
 }
 
 /* List mode status */
 .fuel-list-status {
-  font-size: var(--fuel-list-font-size-status);
-  padding: var(--fuel-spacing-xs) var(--fuel-spacing-md);
-  border-radius: var(--fuel-status-border-radius);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--status-border-radius);
   text-transform: uppercase;
 }
 
 .fuel-list-status.open {
-  background-color: var(--fuel-status-open);
-  color: var(--fuel-list-text-primary);
+  background-color: var(--status-open);
+  color: var(--color-primary);
 }
 
 .fuel-list-status.closed {
-  background-color: var(--fuel-status-closed);
-  color: var(--fuel-list-text-primary);
+  background-color: var(--status-closed);
+  color: var(--color-primary);
 }
 
 .fuel-list-status.closing-soon {
-  background-color: var(--fuel-status-closing-soon);
-  color: black;
+  background-color: var(--status-closing-soon);
 }
 
 /* List mode address */
 .fuel-list-address {
-  font-size: var(--fuel-list-font-size-address);
-  color: var(--fuel-list-text-muted);
-  margin-top: var(--fuel-spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
+  margin-top: var(--spacing-md);
 }
 
 /* ===== BORDER STYLES ===== */
 .fuel-station-individual {
-  border: 1px solid var(--fuel-border-color);
-  border-radius: var(--fuel-border-radius);
-  background-color: var(--fuel-bg-overlay);
-  padding: var(--fuel-spacing-xl);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
 }
 
 .fuel-wrapper-all {
-  border: 1px solid var(--fuel-border-color);
-  border-radius: var(--fuel-border-radius);
-  background-color: var(--fuel-bg-overlay);
-  padding: var(--fuel-spacing-xl);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
 }
 
 .fuel-wrapper-all ul {
-  margin: 0;
-  padding: 0;
+  margin: var(--margin-zero);
+  padding: var(--padding-zero);
 }
 
 .fuel-wrapper-all .fuel-list {
-  margin-bottom: var(--fuel-spacing-xxl);
+  margin-bottom: var(--spacing-xxl);
 }
 
 .fuel-wrapper-all .fuel-list:last-child {
-  margin-bottom: 0;
+  margin-bottom: var(--margin-zero);
 }
 
 .fuel-wrapper-all .fuel-last-update {
-  margin-top: var(--fuel-spacing-md);
+  margin-top: var(--spacing-md);
 }
 
 .fuel-station-none {
-  padding: var(--fuel-spacing-xl);
+  padding: var(--spacing-xl);
 }
 
 /* ===== TEXT ALIGNMENT ===== */
@@ -214,32 +226,27 @@
 
 /* ===== STATIC DISPLAY MODE ===== */
 .fuel-static {
-  /* Static mode variables */
-  --fuel-static-font-size: 1.1rem;
-  --fuel-static-logo-size: 20px;
-
-  --size: 1.4rem;
-  font-size: var(--size);
-  line-height: calc(var(--size) * 1.44);
+  font-size: var(--font-size-static);
+  line-height: calc(var(--font-size-static) * var(--line-height-multiplier));
 }
 
 .fuel-static .fuel-static-logo {
-  width: calc(var(--size) * 0.7);
-  height: calc(var(--size) * 0.7);
+  width: calc(var(--font-size-static) * var(--logo-scale));
+  height: calc(var(--font-size-static) * var(--logo-scale));
 }
 
 .MMM-Fuel-NSW .fuel-static.table th,
 td {
-  padding: 0 0;
+  padding: var(--padding-zero) var(--padding-zero);
 }
 
 /* ===== PRICE STATUS COLORS ===== */
 .fuel-list-price.closed,
 .fuel-static-price.closed {
-  color: var(--fuel-status-closed);
+  color: var(--status-closed);
 }
 
 .fuel-list-price.closing-soon,
 .fuel-static-price.closing-soon {
-  color: var(--fuel-status-closing-soon);
+  color: var(--status-closing-soon);
 }
