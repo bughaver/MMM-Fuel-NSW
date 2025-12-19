@@ -12,23 +12,23 @@ The backend follows a **Repository Pattern** with clear separation of concerns:
 src/backend/
 ├── Backend.ts              # Main backend entry point
 ├── BackendTypes.ts         # Backend-specific TypeScript interfaces
-├── Service/
-│   ├── BackendService.ts   # Business logic and orchestration
-│   └── Repository/
-│       ├── BackendRepository.ts    # Main data access layer
-│       ├── Connector/
-│       │   └── FuelApiConnector.ts # External API communication
-│       ├── Mapper/
-│       │   ├── BackendMapper.ts    # Data transformation logic
-│       │   └── Util/               # Mapper utility functions
-│       │       ├── AddressUtils.ts # Address normalization
-│       │       ├── LocationUtils.ts # Location processing
-│       │       ├── BrandUtils.ts   # Brand logo handling
-│       │       └── TimeUtils.ts    # Time calculations
-│       └── Util/
-│           └── BoundingBoxUtils.ts # Geographic calculations
-└── Service/Util/
-    └── ConfigValidationUtils.ts    # Configuration validation
+└── Service/
+    ├── BackendService.ts   # Business logic and orchestration
+    ├── Util/
+    │   └── ConfigValidationUtils.ts # Configuration validation
+    └── Repository/
+        ├── BackendRepository.ts    # Main data access layer
+        ├── Connector/
+        │   └── FuelApiConnector.ts # External API communication
+        ├── Mapper/
+        │   ├── BackendMapper.ts    # Data transformation logic
+        │   └── Util/               # Mapper utility functions
+        │       ├── AddressUtils.ts # Address normalization
+        │       ├── LocationUtils.ts # Location processing
+        │       ├── BrandUtils.ts   # Brand logo handling
+        │       └── TimeUtils.ts    # Time calculations
+        └── Util/
+            └── BoundingBoxUtils.ts # Geographic calculations
 ```
 
 #### Key Architectural Patterns
