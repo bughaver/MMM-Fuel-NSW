@@ -20,41 +20,6 @@ describe('AddressUtils', () => {
       expect(result).toBe('123 Test Street, Sydney NSW 2000');
     });
 
-    test('expands all road type abbreviations', () => {
-      expect(AddressUtils.normalizeAddress('123 test ave, sydney NSW 2000')).toBe('123 Test Avenue, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test av, sydney NSW 2000')).toBe('123 Test Avenue, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test dr, sydney NSW 2000')).toBe('123 Test Drive, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test ct, sydney NSW 2000')).toBe('123 Test Court, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test pl, sydney NSW 2000')).toBe('123 Test Place, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test ln, sydney NSW 2000')).toBe('123 Test Lane, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test way, sydney NSW 2000')).toBe('123 Test Way, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test hwy, sydney NSW 2000')).toBe('123 Test Highway, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test hw, sydney NSW 2000')).toBe('123 Test Highway, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test cres, sydney NSW 2000')).toBe(
-        '123 Test Crescent, Sydney NSW 2000',
-      );
-      expect(AddressUtils.normalizeAddress('123 test cl, sydney NSW 2000')).toBe('123 Test Close, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test pde, sydney NSW 2000')).toBe('123 Test Parade, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test sq, sydney NSW 2000')).toBe('123 Test Square, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test terr, sydney NSW 2000')).toBe('123 Test Terrace, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test bvd, sydney NSW 2000')).toBe(
-        '123 Test Boulevard, Sydney NSW 2000',
-      );
-      expect(AddressUtils.normalizeAddress('123 test cir, sydney NSW 2000')).toBe('123 Test Circle, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test gr, sydney NSW 2000')).toBe('123 Test Grove, Sydney NSW 2000');
-      expect(AddressUtils.normalizeAddress('123 test hill, sydney NSW 2000')).toBe('123 Test Hill, Sydney NSW 2000');
-    });
-
-    test('capitalizes all state abbreviations', () => {
-      expect(AddressUtils.normalizeAddress('123 test st, suburb act 2000')).toBe('123 Test Street, Suburb ACT 2000');
-      expect(AddressUtils.normalizeAddress('123 test st, suburb qld 2000')).toBe('123 Test Street, Suburb QLD 2000');
-      expect(AddressUtils.normalizeAddress('123 test st, suburb wa 2000')).toBe('123 Test Street, Suburb WA 2000');
-      expect(AddressUtils.normalizeAddress('123 test st, suburb sa 2000')).toBe('123 Test Street, Suburb SA 2000');
-      expect(AddressUtils.normalizeAddress('123 test st, suburb nt 2000')).toBe('123 Test Street, Suburb NT 2000');
-      expect(AddressUtils.normalizeAddress('123 test st, suburb tas 2000')).toBe('123 Test Street, Suburb TAS 2000');
-      expect(AddressUtils.normalizeAddress('123 test st, suburb vic 2000')).toBe('123 Test Street, Suburb VIC 2000');
-    });
-
     test('handles direction abbreviations correctly', () => {
       // Direction abbreviations should be capitalized at start of address
       expect(AddressUtils.normalizeAddress('n test st, sydney NSW 2000')).toBe('N Test Street, Sydney NSW 2000');

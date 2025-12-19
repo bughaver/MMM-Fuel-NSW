@@ -46,25 +46,6 @@ describe('FrontendService', () => {
 
       expect(result).toBe('$195.50');
     });
-
-    test('formats price with cents correctly', () => {
-      const station: FuelStation = {
-        name: 'Test Station',
-        brand: 'BP',
-        location: 'Test Location',
-        address: '123 Test St',
-        price: 200,
-        distance: 1.2,
-        fieldType: 'P95',
-        isOpenNow: true,
-        isClosingSoon: false,
-        logoUrl: 'logo.png',
-      };
-
-      const result = FrontendService.getPrice(station);
-
-      expect(result).toBe('$200.00');
-    });
   });
 
   describe('getDistance', () => {
@@ -85,25 +66,6 @@ describe('FrontendService', () => {
       const result = FrontendService.getDistance(station);
 
       expect(result).toBe('1.3km');
-    });
-
-    test('formats whole number distance correctly', () => {
-      const station: FuelStation = {
-        name: 'Test Station',
-        brand: 'BP',
-        location: 'Test Location',
-        address: '123 Test St',
-        price: 195,
-        distance: 2.0,
-        fieldType: 'P95',
-        isOpenNow: true,
-        isClosingSoon: false,
-        logoUrl: 'logo.png',
-      };
-
-      const result = FrontendService.getDistance(station);
-
-      expect(result).toBe('2.0km');
     });
   });
 

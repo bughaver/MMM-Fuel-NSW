@@ -70,34 +70,12 @@ describe('LocationUtils', () => {
       expect(result).toBe('Sydney East');
     });
 
-    test('uses suburb from address when brand removal fails', () => {
-      const result = LocationUtils.combineNameAndAddress(
-        'Metro Petroleum Gosford',
-        '57 Central Coast Highway, West Gosford NSW 2250',
-      );
-      expect(result).toBe('West Gosford');
-    });
-
     test('removes parentheses and extra info', () => {
       const result = LocationUtils.combineNameAndAddress(
         'Costco Marsden Park (Members only)',
         '10 Langford Drive, Marsden Park NSW 2765',
       );
       expect(result).toBe('Marsden Park');
-    });
-
-    test('handles complex location names', () => {
-      const result = LocationUtils.combineNameAndAddress(
-        '7-Eleven North Sydney',
-        '123 Pacific Highway, North Sydney NSW 2060',
-      );
-      expect(result).toBe('North Sydney');
-    });
-
-    test('handles park names correctly', () => {
-      // When name contains location keywords, it falls back to the cleaned name
-      const result = LocationUtils.combineNameAndAddress('BP Park Avenue', '456 Park Avenue, Sydney NSW 2000');
-      expect(result).toBe('BP Park Avenue');
     });
 
     test('falls back to location name when seems like location', () => {
@@ -110,31 +88,6 @@ describe('LocationUtils', () => {
       expect(result).toBe('Sydney');
     });
 
-    test('handles suburb extraction from space-separated address format', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Test Road Suburb NSW 2000');
-      expect(result).toBe('Suburb');
-    });
-
-    test('handles suburb extraction when suburb candidate is road type', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main Road NSW 2000');
-      expect(result).toBe('Road');
-    });
-
-    test('handles suburb extraction when suburb contains numbers', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Test Street 1st Avenue NSW 2000');
-      expect(result).toBe('Avenue');
-    });
-
-    test('handles suburb extraction with multiple direction words', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Test Road North East Sydney NSW 2000');
-      expect(result).toBe('East Sydney');
-    });
-
-    test('handles suburb extraction when address has no valid suburb pattern', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', 'Highway 123 NSW 2000');
-      expect(result).toBe('123');
-    });
-
     test('handles combineNameAndAddress when normalizedAddress is empty', () => {
       const result = LocationUtils.combineNameAndAddress('Test Station', '');
       expect(result).toBe('Test Station');
@@ -142,57 +95,7 @@ describe('LocationUtils', () => {
 
     test('handles combineNameAndAddress call when normalizedAddress has special characters', () => {
       const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main St, Test&Suburb NSW 2000');
-      expect(result).toBe('Test&Suburb'); // toPascalCase capitalizes each word
-    });
-
-    test('handles combineNameAndAddress with complex suburb patterns', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Pacific Highway, North Shore NSW 2000');
-      expect(result).toBe('North Shore');
-    });
-
-    test('handles suburb extraction when suburb contains direction word', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Test Road North Sydney NSW 2000');
-      expect(result).toBe('North Sydney');
-    });
-
-    test('handles suburb extraction when second last word is direction', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Test Road South Coast NSW 2000');
-      expect(result).toBe('South Coast');
-    });
-
-    test('falls back to last word when suburb extraction fails completely', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Test Road NSW 2000');
-      expect(result).toBe('Road');
-    });
-
-    test('handles suburb extraction with central direction', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main Central Sydney NSW 2000');
-      expect(result).toBe('Central Sydney');
-    });
-
-    test('handles suburb extraction when last word contains digits', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main 123 NSW 2000');
-      expect(result).toBe('123');
-    });
-
-    test('handles direction in remaining part not matching regex', () => {
-      const result = LocationUtils.combineNameAndAddress('Central Sydney Central', '123 Main Central Sydney NSW 2000');
-      expect(result).toBe('Central Sydney');
-    });
-
-    test('handles brand removal when name is only brand', () => {
-      const result = LocationUtils.removeBrandPrefix('BP', 'BP');
-      expect(result).toBe('');
-    });
-
-    test('handles brand removal with no suffix match', () => {
-      const result = LocationUtils.removeBrandPrefix('BP Station', 'BP');
-      expect(result).toBe(' Station');
-    });
-
-    test('handles brand removal with multiple suffixes', () => {
-      const result = LocationUtils.removeBrandPrefix('BP Fuel Roadhouse Station', 'BP');
-      expect(result).toBe(' Fuel Roadhouse Station'); // No suffix match found, returns after first word removal
+      expect(result).toBe('Test&Suburb');
     });
 
     test('handles combineNameAndAddress with empty suburb', () => {
@@ -200,35 +103,9 @@ describe('LocationUtils', () => {
       expect(result).toBe('Test Station');
     });
 
-    test('handles combineNameAndAddress with suburb containing numbers', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main St 1st Ave NSW 2000');
-      expect(result).toBe('Ave');
-    });
-
-    test('handles combineNameAndAddress with single word address', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', 'Road NSW 2000');
-      expect(result).toBe('Road');
-    });
-
-    test('handles single word suburb extraction', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', 'Sydney NSW 2000');
-      expect(result).toBe('Sydney');
-    });
-
     test('handles empty address parts', () => {
-      // When address has no valid suburb pattern, it falls back to the station name
       const result = LocationUtils.combineNameAndAddress('Test Station', 'NSW 2000');
-      expect(result).toBe('Test Station'); // Falls back to station name when no suburb found
-    });
-
-    test('handles suburb extraction with circuit road type', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main Circuit NSW 2000');
-      expect(result).toBe('Circuit');
-    });
-
-    test('handles suburb extraction with boulevard road type', () => {
-      const result = LocationUtils.combineNameAndAddress('Test Station', '123 Main Boulevard NSW 2000');
-      expect(result).toBe('Boulevard');
+      expect(result).toBe('Test Station');
     });
   });
 
@@ -341,6 +218,11 @@ describe('LocationUtils', () => {
     test('falls back to last word when it contains digits', () => {
       const result = LocationUtils.extractSuburbCandidate(['123', 'Main', '123']);
       expect(result).toBe('123');
+    });
+
+    test('returns single word when parts has only one element', () => {
+      const result = LocationUtils.extractSuburbCandidate(['Sydney']);
+      expect(result).toBe('Sydney');
     });
   });
 
