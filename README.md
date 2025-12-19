@@ -17,6 +17,16 @@ MMM-Fuel-NSW is your smart fuel price companion for MagicMirror². Get real-time
 - **🔧 Highly Customizable**: Tailor display to your preferences
 - **📱 Mirror Integration**: Seamlessly fits your smart mirror lifestyle
 
+## Screenshots
+
+### List Display Mode (Default)
+
+![MMM-Fuel-NSW List Mode](docs/list.png)
+
+### Static Display Mode
+
+![MMM-Fuel-NSW Static Mode](docs/static.png)
+
 ## Quick Start
 
 ### 1. Install the Module
@@ -49,6 +59,8 @@ Add to your `~/MagicMirror/config/config.js`:
     }
 }
 ```
+
+> **Note:** This is the minimal configuration. For all available options including fuel types, brands, display modes, and advanced settings, see the **[Configuration Reference](docs/configuration-reference.md)**.
 
 ### 4. Validate Configuration (Optional)
 
@@ -94,23 +106,13 @@ _"Finally, fuel prices without leaving my breakfast routine"_ ⭐⭐⭐⭐⭐
 
 _"The distance feature is a game-changer for route planning"_ ⭐⭐⭐⭐⭐
 
-## Screenshots
-
-### List Display Mode (Default)
-
-![MMM-Fuel-NSW List Mode](docs/list.png)
-
-### Static Display Mode
-
-![MMM-Fuel-NSW Static Mode](docs/static.png)
-
 ## 📖 Documentation
 
-- **[Installation Guide](https://github.com/bughaver/MMM-Fuel-NSW/wiki/Installation-Guide)** - Detailed setup instructions
-- **[Configuration Reference](https://github.com/bughaver/MMM-Fuel-NSW/wiki/Configuration-Reference)** - All configuration options
-- **[Architecture & Development](https://github.com/bughaver/MMM-Fuel-NSW/wiki/Architecture-&-Development)** - Technical documentation
-- **[Troubleshooting](https://github.com/bughaver/MMM-Fuel-NSW/wiki/Troubleshooting)** - Common issues and solutions
-- **[Contributing](https://github.com/bughaver/MMM-Fuel-NSW/wiki/Contributing)** - Development guidelines
+- **[Installation Guide](docs/installation-guide.md)** - Detailed setup instructions
+- **[Configuration Reference](docs/configuration-reference.md)** - All configuration options
+- **[Architecture & Development](docs/architecture-development.md)** - Technical documentation
+- **[Troubleshooting](docs/troubleshooting.md)** - Common issues and solutions
+- **[Contributing](docs/contributing.md)** - Development guidelines
 
 ## License
 
