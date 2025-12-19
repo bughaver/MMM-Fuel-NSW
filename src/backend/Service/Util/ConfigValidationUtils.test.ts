@@ -1,5 +1,5 @@
 import { ConfigValidationUtils } from './ConfigValidationUtils';
-import { Config } from '../../../types/Config';
+import { Config } from '../../../Types';
 import { ReferenceData } from '../../BackendTypes';
 
 describe('ConfigValidationUtils', () => {

@@ -1,4 +1,4 @@
-import { Config } from '../../../types/Config';
+import { Config } from '../../../Types';
 import { ReferenceData, ValidationResult } from '../../BackendTypes';
 
 export class ConfigValidationUtils {

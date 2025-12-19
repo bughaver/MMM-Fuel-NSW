@@ -36,3 +36,8 @@ export type FuelStation = {
   isClosingSoon: boolean;
   logoUrl?: string;
 };
+
+export type State = {
+  lastUpdate: number;
+  stations: FuelStation[];
+};

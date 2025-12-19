@@ -2,7 +2,7 @@ import { BackendService } from '../../src/backend/Service/BackendService';
 import { BackendRepository } from '../../src/backend/Service/Repository/BackendRepository';
 import { BackendMapper } from '../../src/backend/Service/Repository/Mapper/BackendMapper';
 import { FuelApiConnector } from '../../src/backend/Service/Repository/Connector/FuelApiConnector';
-import { Config } from '../../src/types/Config';
+import { Config } from '../../src/Types';
 
 describe('MMM-Fuel-NSW E2E Tests', () => {
   let service: BackendService;

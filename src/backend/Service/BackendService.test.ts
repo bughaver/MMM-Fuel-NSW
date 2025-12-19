@@ -1,6 +1,6 @@
 import { BackendService } from './BackendService';
 import { BackendRepository } from './Repository/BackendRepository';
-import { Config } from '../../types/Config';
+import { Config } from '../../Types';
 import { ReferenceData } from '../BackendTypes';
 
 jest.mock('./Repository/BackendRepository');

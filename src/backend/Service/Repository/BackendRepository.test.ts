@@ -1,7 +1,7 @@
 import { BackendRepository } from './BackendRepository';
 import { BackendMapper } from './Mapper/BackendMapper';
 import { FuelApiConnector } from './Connector/FuelApiConnector';
-import { Config } from '../../../types/Config';
+import { Config } from '../../../Types';
 import { ReferenceData } from '../../BackendTypes';
 
 function createDefaultConfig(overrides: Partial<Config> = {}): Config {

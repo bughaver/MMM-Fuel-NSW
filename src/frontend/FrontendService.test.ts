@@ -1,5 +1,5 @@
 import FrontendService from './FrontendService';
-import { FuelStation } from '../types/Config';
+import { FuelStation } from '../Types';
 
 describe('FrontendService', () => {
   describe('getPriceStyle', () => {

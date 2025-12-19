@@ -1,4 +1,4 @@
-import { FuelStation } from '../../../../types/Config';
+import { FuelStation } from '../../../../Types';
 import { RawFuelStation, BrandItem } from '../../../BackendTypes';
 import { AddressUtils } from './Util/AddressUtils';
 import { LocationUtils } from './Util/LocationUtils';

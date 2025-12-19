@@ -1,4 +1,4 @@
-import { FuelStation } from '../types/Config';
+import { FuelStation } from '../Types';
 
 type CurrencyStyle = Intl.NumberFormatOptions;
 

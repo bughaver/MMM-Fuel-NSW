@@ -1,4 +1,4 @@
-import { Config, FuelStation } from '../../../types/Config';
+import { Config, FuelStation } from '../../../Types';
 import { RawFuelStation, ReferenceData } from '../../BackendTypes';
 import { BackendMapper } from './Mapper/BackendMapper';
 import { FuelApiConnector } from './Connector/FuelApiConnector';

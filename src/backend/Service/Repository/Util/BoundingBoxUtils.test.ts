@@ -1,5 +1,5 @@
 import { BoundingBoxUtils } from './BoundingBoxUtils';
-import { Config } from '../../../../types/Config';
+import { Config } from '../../../../Types';
 
 describe('BoundingBoxUtils', () => {
   describe('calculateBoundingBox', () => {

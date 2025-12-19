@@ -1,11 +1,10 @@
 import * as NodeHelper from 'node_helper';
 import * as Log from 'logger';
-import { State } from '../types/State';
+import { State, Config } from '../Types';
 import { BackendService } from './Service/BackendService';
 import { BackendRepository } from './Service/Repository/BackendRepository';
 import { BackendMapper } from './Service/Repository/Mapper/BackendMapper';
 import { FuelApiConnector } from './Service/Repository/Connector/FuelApiConnector';
-import { Config } from '../types/Config';
 
 module.exports = NodeHelper.create({
   backendService: null as BackendService | null,

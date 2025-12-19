@@ -1,4 +1,4 @@
-import { Config, FuelStation } from '../../types/Config';
+import { Config, FuelStation } from '../../Types';
 import { ValidationResult } from '../BackendTypes';
 import { BackendRepository } from './Repository/BackendRepository';
 import { ConfigValidationUtils } from './Util/ConfigValidationUtils';

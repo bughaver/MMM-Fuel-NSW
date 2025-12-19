@@ -1,5 +1,5 @@
 import FrontendService from './FrontendService';
-import { Config } from '../types/Config';
+import { Config } from '../Types';
 
 // Global or injected variable declarations
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
