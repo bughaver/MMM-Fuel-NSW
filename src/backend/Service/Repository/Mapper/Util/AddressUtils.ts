@@ -41,15 +41,16 @@ export class AddressUtils {
   static extractSuburbFromAddress(normalizedAddress: string | undefined): string {
     if (!normalizedAddress) return '';
 
+    // Try primary pattern: suburb, state postcode
     let suburbMatch = normalizedAddress.match(/,\s*([^,]+)\s+NSW\s+\d{4}/i);
     let suburb = suburbMatch ? suburbMatch[1].trim() : '';
 
     if (!suburb) {
+      // Fallback pattern: suburb NSW postcode
       suburbMatch = normalizedAddress.match(/(\w+(?:\s+\w+)*)\s+NSW\s+\d{4}/i);
       if (suburbMatch) {
         const fullMatch = suburbMatch[1].trim();
         const parts = fullMatch.split(/\s+/);
-
         suburb = this.extractSuburbCandidate(parts);
       }
     }

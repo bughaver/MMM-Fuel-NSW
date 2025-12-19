@@ -16,11 +16,7 @@ export class BackendMapper {
     this.timeUtils = TimeUtils;
   }
 
-  async mapToFuelStation(
-    rawStation: RawFuelStation,
-    brands: BrandItem[],
-    currentTime: Date = new Date(),
-  ): Promise<FuelStation> {
+  mapToFuelStation(rawStation: RawFuelStation, brands: BrandItem[], currentTime: Date = new Date()): FuelStation {
     const todayHours = rawStation.tradinghours?.find((h) => h.Day === rawStation.Day);
     const logoUrl = BrandUtils.getLogoUrl(brands, rawStation.Brand);
 

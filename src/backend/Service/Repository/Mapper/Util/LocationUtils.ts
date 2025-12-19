@@ -36,23 +36,27 @@ export class LocationUtils {
     const brandLower = brand.toLowerCase();
     const nameLower = name.toLowerCase();
 
+    // If name starts with full brand name, remove it
     if (nameLower.startsWith(brandLower)) {
       return this.cleanLeadingSeparators(name.substring(brand.length));
     }
 
+    // Try removing just the first word of brand + common fuel suffixes
     const firstBrandWord = brandLower.split(' ')[0];
     if (nameLower.startsWith(firstBrandWord + ' ')) {
       const afterBrand = nameLower.substring(firstBrandWord.length + 1);
 
+      // Look for fuel-related suffixes after the brand word
       for (const suffix of this.BRAND_SUFFIXES) {
         const suffixIndex = afterBrand.toLowerCase().indexOf(suffix.toLowerCase());
         if (suffixIndex !== -1) {
+          // Find the end of the word containing the suffix
           const wordEnd = afterBrand.indexOf(' ', suffixIndex + suffix.length);
           const cutIndex = firstBrandWord.length + 1 + (wordEnd === -1 ? afterBrand.length : wordEnd);
           if (cutIndex > 0 && cutIndex < nameLower.length) {
             return this.cleanLeadingSeparators(name.substring(cutIndex));
           }
-          break;
+          break; // Only try first matching suffix
         }
       }
     }
@@ -61,35 +65,42 @@ export class LocationUtils {
   }
 
   static combineNameAndAddress(cleanName: string, normalizedAddress: string): string {
+    // Extract suburb from address
     const suburb = this.extractSuburbFromAddress(normalizedAddress);
     if (!suburb) {
+      // No suburb found, return name without parentheses
       return cleanName.replace(/\s*\([^)]*\)\s*/g, '').trim();
     }
 
+    // Remove parentheses from name for comparison
     const cleanNameNoParens = cleanName.replace(/\s*\([^)]*\)\s*/g, '').trim();
 
     const suburbLower = suburb.toLowerCase();
     const nameLower = cleanNameNoParens.toLowerCase();
 
+    // If name already contains the suburb
     if (nameLower.includes(suburbLower)) {
       const suburbIndex = nameLower.indexOf(suburbLower);
       const suburbEndIndex = suburbIndex + suburbLower.length;
-
       const remainingPart = cleanNameNoParens.substring(suburbEndIndex).trim();
 
+      // Check if there's a direction after the suburb
       const directionMatch = remainingPart.match(/^\s*(north|south|east|west)\b/i);
-
       if (directionMatch) {
-        return `${suburb} ${directionMatch[1].charAt(0).toUpperCase() + directionMatch[1].slice(1).toLowerCase()}`;
+        const direction = directionMatch[1].charAt(0).toUpperCase() + directionMatch[1].slice(1).toLowerCase();
+        return `${suburb} ${direction}`;
       }
 
+      // Just return the suburb
       return suburb;
     }
 
+    // If the clean name looks like a location name, use it
     if (this.seemsLikeLocationName(cleanNameNoParens)) {
       return cleanNameNoParens;
     }
 
+    // Default to suburb from address
     return suburb;
   }
 
@@ -110,15 +121,16 @@ export class LocationUtils {
   static extractSuburbFromAddress(normalizedAddress: string): string {
     if (!normalizedAddress) return '';
 
+    // Primary pattern: "Suburb, NSW 1234"
     let suburbMatch = normalizedAddress.match(/,\s*([^,]+)\s+NSW\s+\d{4}/i);
     let suburb = suburbMatch ? suburbMatch[1].trim() : '';
 
     if (!suburb) {
+      // Fallback pattern: "Suburb NSW 1234" (no comma)
       suburbMatch = normalizedAddress.match(/(\w+(?:\s+\w+)*)\s+NSW\s+\d{4}/i);
       if (suburbMatch) {
         const fullMatch = suburbMatch[1].trim();
         const parts = fullMatch.split(/\s+/);
-
         suburb = this.extractSuburbCandidate(parts);
       }
     }
@@ -128,9 +140,12 @@ export class LocationUtils {
 
   static extractSuburbCandidate(parts: string[]): string {
     const lastWord = parts[parts.length - 1];
+
+    // Skip if it's a number or road type
     if (lastWord && !/\d/.test(lastWord) && !this.isRoadType(lastWord)) {
       let suburbCandidate = lastWord;
 
+      // Include direction if present (e.g., "North Sydney" -> "North Sydney")
       if (parts.length >= 2) {
         const secondLastWord = parts[parts.length - 2];
         if (this.isDirection(secondLastWord)) {

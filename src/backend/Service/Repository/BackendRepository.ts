@@ -20,8 +20,8 @@ export class BackendRepository {
 
     const rawStations = await this.fetchFuelStations(processedConfig);
 
-    let stations = await Promise.all(
-      rawStations.map((raw: RawFuelStation) => this.backendMapper.mapToFuelStation(raw, referenceData.brands.items)),
+    let stations = rawStations.map((raw: RawFuelStation) =>
+      this.backendMapper.mapToFuelStation(raw, referenceData.brands.items),
     );
 
     stations = this.applyFilters(stations, processedConfig);
@@ -46,28 +46,32 @@ export class BackendRepository {
   }
 
   private applyFilters(stations: FuelStation[], config: Config): FuelStation[] {
-    let filtered = [...stations];
+    let filteredStations = [...stations];
 
-    // Don't filter if brands contains 'SelectAll' (meaning user wants all brands)
+    // Filter by brands if user specified brands (not empty and not 'SelectAll')
+    // 'SelectAll' is added when brands array is empty, meaning get all brands
     if (config.brands.length > 0 && !config.brands.includes('SelectAll')) {
-      filtered = filtered.filter((station) => config.brands.includes(station.brand));
+      filteredStations = filteredStations.filter((station) => config.brands.includes(station.brand));
     }
 
-    filtered.sort((a, b) => {
+    // Sort by price (default) or distance
+    filteredStations.sort((stationA, stationB) => {
       if (config.sortBy === 'distance') {
-        return a.distance - b.distance;
+        return stationA.distance - stationB.distance;
       }
-      return a.price - b.price;
+      return stationA.price - stationB.price;
     });
 
+    // Filter by maximum distance if specified
     if (config.distance !== undefined) {
-      filtered = filtered.filter((station) => station.distance <= config.distance!);
+      filteredStations = filteredStations.filter((station) => station.distance <= config.distance!);
     }
 
+    // Limit number of results if specified
     if (config.limit !== undefined) {
-      filtered = filtered.slice(0, config.limit);
+      filteredStations = filteredStations.slice(0, config.limit);
     }
 
-    return filtered;
+    return filteredStations;
   }
 }
