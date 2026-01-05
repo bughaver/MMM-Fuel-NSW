@@ -1,4 +1,3 @@
-import banner2 from 'rollup-plugin-banner2';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -23,10 +22,11 @@ export default [
   {
     input: './src/frontend/Frontend.ts',
     external: ['logger'],
-    plugins: [typescript({ module: 'ESNext' }), nodeResolve(), commonjs(), terser(), banner2(() => bannerText)],
+    plugins: [typescript({ module: 'ESNext' }), nodeResolve(), commonjs(), terser()],
     output: {
       file: `./${pkg.main}`,
       format: 'iife',
+      banner: bannerText,
       globals: {
         logger: 'Log',
       },
@@ -35,11 +35,12 @@ export default [
   {
     input: './src/backend/Backend.ts',
     external: ['node_helper', 'logger'],
-    plugins: [typescript({ module: 'ESNext' }), nodeResolve(), terser(), banner2(() => bannerText)],
+    plugins: [typescript({ module: 'ESNext' }), nodeResolve(), terser()],
     output: {
       interop: 'auto',
       file: './node_helper.js',
       format: 'cjs',
+      banner: bannerText,
     },
   },
 ];
