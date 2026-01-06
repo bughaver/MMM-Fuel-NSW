@@ -18,6 +18,7 @@ export type Config = {
   showLogo: boolean;
   showOpenStatus: boolean;
   showFuelType: boolean;
+  showClosedStations: boolean;
   borderStyle: 'none' | 'individual' | 'all';
   showLastUpdate: boolean;
   displayMode: 'list' | 'static';

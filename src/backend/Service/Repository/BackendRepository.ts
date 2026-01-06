@@ -54,6 +54,11 @@ export class BackendRepository {
       filteredStations = filteredStations.filter((station) => config.brands.includes(station.brand));
     }
 
+    // Filter out closed stations if showClosedStations is false
+    if (!config.showClosedStations) {
+      filteredStations = filteredStations.filter((station) => station.isOpenNow);
+    }
+
     // Sort by price (default) or distance
     filteredStations.sort((stationA, stationB) => {
       if (config.sortBy === 'distance') {

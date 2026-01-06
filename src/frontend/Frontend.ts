@@ -24,6 +24,7 @@ Module.register('MMM-Fuel-NSW', {
     showLogo: true,
     showOpenStatus: true,
     showFuelType: true,
+    showClosedStations: true,
     borderStyle: 'all',
     showLastUpdate: true,
     displayMode: 'list',

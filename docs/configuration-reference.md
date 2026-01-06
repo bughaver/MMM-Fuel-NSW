@@ -52,6 +52,7 @@
 | `showLogo`                | `boolean` | `true`      | Display brand logos                         |
 | `showOpenStatus`          | `boolean` | `true`      | Display open/closed status                  |
 | `showFuelType`            | `boolean` | `true`      | Display fuel type next to price             |
+| `showClosedStations`      | `boolean` | `true`      | Display stations that are currently closed  |
 | `alignment`               | `string`  | `'center'`  | Text alignment: 'left', 'center', 'right'   |
 | `borderStyle`             | `string`  | `'all'`     | Border style: 'none', 'individual', 'all'   |
 | `showLastUpdate`          | `boolean` | `true`      | Display last update timestamp               |

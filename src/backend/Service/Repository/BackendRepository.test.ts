@@ -19,6 +19,7 @@ function createDefaultConfig(overrides: Partial<Config> = {}): Config {
     showLogo: true,
     showOpenStatus: true,
     showFuelType: true,
+    showClosedStations: true,
     borderStyle: 'all',
     showLastUpdate: true,
     displayMode: 'list',
@@ -148,6 +149,54 @@ describe('BackendRepository', () => {
 
       expect(result).toHaveLength(1);
       expect(result[0].brand).toBe('BP');
+    });
+
+    test('filters out closed stations when showClosedStations is false', async () => {
+      // Mock connector to return stations with mixed open status
+      mockFuelApiConnector.fetchFuelStationsByLocation.mockResolvedValue([
+        {
+          Name: 'BP Ulladulla',
+          Brand: 'BP',
+          Address: '155-157 Princes Highway, Ulladulla NSW 2539',
+          Price: 200,
+          Distance: 1.0,
+          FuelType: 'P95',
+          Day: 'SATURDAY',
+          tradinghours: [{ Day: 'SATURDAY', IsOpenNow: true, IsOpen24Hours: false, EndTime: '22:00' }],
+        },
+        {
+          Name: 'Shell Milton',
+          Brand: 'Shell',
+          Address: 'Corner Princes Highway & Croobyar Road, Milton NSW 2538',
+          Price: 195,
+          Distance: 2.0,
+          FuelType: 'P95',
+          Day: 'SATURDAY',
+          tradinghours: [{ Day: 'SATURDAY', IsOpenNow: false, IsOpen24Hours: false, EndTime: '18:00' }],
+        },
+        {
+          Name: 'Caltex Nowra',
+          Brand: 'Caltex',
+          Address: '123 Main St, Nowra NSW 2541',
+          Price: 190,
+          Distance: 3.0,
+          FuelType: 'P95',
+          Day: 'SATURDAY',
+          tradinghours: [{ Day: 'SATURDAY', IsOpenNow: true, IsOpen24Hours: false, EndTime: '20:00' }],
+        },
+      ]);
+
+      const configWithShowClosedFalse = { ...mockConfig, showClosedStations: false };
+
+      const result = await repository.getFuelStations(configWithShowClosedFalse);
+
+      // Should only return stations that are open (isOpenNow: true)
+      expect(result).toHaveLength(2);
+      result.forEach((station) => {
+        expect(station.isOpenNow).toBe(true);
+      });
+      // Verify that closed station is not included
+      expect(result.find((s) => s.name === 'Shell Milton')).toBeUndefined();
     });
 
     test('calls connector methods correctly', async () => {
