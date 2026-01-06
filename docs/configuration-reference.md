@@ -58,6 +58,7 @@
 | `showLastUpdate`          | `boolean` | `true`      | Display last update timestamp                |
 | `displayMode`             | `string`  | `'list'`    | Display mode: 'list' or 'static'             |
 | `showTankPrice`           | `number`  | `undefined` | Tank size in liters for full tank price calc |
+| `priceUnit`               | `string`  | `'cents'`   | Price display unit: 'cents' or 'dollars'     |
 
 ## Location Configuration
 
@@ -187,6 +188,16 @@ config: {
 config: {
     showTankPrice: 50,
     limit: 5
+}
+
+// Display prices in cents (default)
+config: {
+    priceUnit: 'cents'
+}
+
+// Display prices in dollars with exact precision (e.g., "$1.6980")
+config: {
+    priceUnit: 'dollars'
 }
 ```
 

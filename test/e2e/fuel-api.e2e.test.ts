@@ -32,10 +32,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       const result = await service.getFuelStations(config);
@@ -59,7 +61,7 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(typeof station.brand).toBe('string');
       expect(typeof station.location).toBe('string');
       expect(typeof station.address).toBe('string');
-      expect(typeof station.price).toBe('number');
+      expect(typeof station.price).toBe('string');
       expect(typeof station.distance).toBe('number');
       expect(typeof station.fieldType).toBe('string');
       expect(typeof station.isOpenNow).toBe('boolean');
@@ -83,10 +85,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       const result = await service.getFuelStations(config);
@@ -117,10 +121,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       const result = await service.getFuelStations(config);
@@ -151,10 +157,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       const result = await service.getFuelStations(config);
@@ -164,7 +172,9 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
       expect(result.length).toBeLessThanOrEqual(5);
 
       for (let i = 1; i < result.length; i++) {
-        expect(result[i].price).toBeGreaterThanOrEqual(result[i - 1].price);
+        const currentPrice = parseFloat(result[i].price.replace('c', ''));
+        const prevPrice = parseFloat(result[i - 1].price.replace('c', ''));
+        expect(currentPrice).toBeGreaterThanOrEqual(prevPrice);
       }
     }, 15000);
 
@@ -187,10 +197,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       const result = await service.getFuelStations(config);
@@ -217,10 +229,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       const result = await service.getFuelStations(config);
@@ -251,10 +265,12 @@ describe('MMM-Fuel-NSW E2E Tests', () => {
         showLogo: true,
         showOpenStatus: true,
         showFuelType: false,
+        showClosedStations: true,
         borderStyle: 'individual',
         showLastUpdate: false,
         displayMode: 'list',
         alignment: 'left',
+        priceUnit: 'cents',
       };
 
       await expect(service.getFuelStations(invalidConfig)).rejects.toThrow();

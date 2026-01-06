@@ -21,7 +21,13 @@ export class BackendRepository {
     const rawStations = await this.fetchFuelStations(processedConfig);
 
     let stations = rawStations.map((raw: RawFuelStation) =>
-      this.backendMapper.mapToFuelStation(raw, referenceData.brands.items, undefined, processedConfig.showTankPrice),
+      this.backendMapper.mapToFuelStation(
+        raw,
+        referenceData.brands.items,
+        undefined,
+        processedConfig.showTankPrice,
+        processedConfig.priceUnit,
+      ),
     );
 
     stations = this.applyFilters(stations, processedConfig);
@@ -64,7 +70,7 @@ export class BackendRepository {
       if (config.sortBy === 'distance') {
         return stationA.distance - stationB.distance;
       }
-      return stationA.price - stationB.price;
+      return stationA.rawPrice - stationB.rawPrice;
     });
 
     // Filter by maximum distance if specified

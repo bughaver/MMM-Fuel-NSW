@@ -21,7 +21,7 @@ export default class FrontendService {
   }
 
   static getPrice(station: FuelStation): string {
-    return station.price.toLocaleString('en-AU', FrontendService.getPriceStyle());
+    return station.price;
   }
 
   static getDistance(station: FuelStation): string {
@@ -47,9 +47,6 @@ export default class FrontendService {
   }
 
   static getTankPrice(station: FuelStation): string {
-    if (station.tankPrice === undefined) {
-      return '';
-    }
-    return station.tankPrice.toLocaleString('en-AU', FrontendService.getPriceStyle());
+    return station.tankPrice || '';
   }
 }

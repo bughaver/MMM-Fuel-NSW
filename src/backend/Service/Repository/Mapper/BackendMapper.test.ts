@@ -51,7 +51,8 @@ describe('BackendMapper', () => {
         brand: 'BP',
         location: 'Sydney', // Now correctly extracts suburb from address
         address: '123 Test Street, Sydney NSW 2000',
-        price: 200,
+        price: '$2.0000',
+        rawPrice: 200,
         distance: 1.5,
         fieldType: 'P95',
         isOpenNow: true,

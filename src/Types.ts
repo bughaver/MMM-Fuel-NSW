@@ -24,6 +24,7 @@ export type Config = {
   displayMode: 'list' | 'static';
   alignment: 'left' | 'center' | 'right';
   showTankPrice?: number;
+  priceUnit: 'cents' | 'dollars';
 };
 
 export type FuelStation = {
@@ -31,13 +32,14 @@ export type FuelStation = {
   brand: string;
   location: string;
   address: string;
-  price: number;
+  price: string;
+  rawPrice: number;
   distance: number;
   fieldType: string;
   isOpenNow: boolean;
   isClosingSoon: boolean;
   logoUrl?: string;
-  tankPrice?: number;
+  tankPrice?: string;
 };
 
 export type State = {

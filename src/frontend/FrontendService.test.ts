@@ -28,13 +28,14 @@ describe('FrontendService', () => {
   });
 
   describe('getPrice', () => {
-    test('formats price correctly', () => {
+    test('returns formatted price string', () => {
       const station: FuelStation = {
         name: 'Test Station',
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195.5,
+        price: '195.50c',
+        rawPrice: 195.5,
         distance: 1.2,
         fieldType: 'P95',
         isOpenNow: true,
@@ -44,7 +45,7 @@ describe('FrontendService', () => {
 
       const result = FrontendService.getPrice(station);
 
-      expect(result).toBe('$195.50');
+      expect(result).toBe('195.50c');
     });
   });
 
@@ -55,7 +56,8 @@ describe('FrontendService', () => {
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195,
+        price: '$195.00',
+        rawPrice: 195,
         distance: 1.25,
         fieldType: 'P95',
         isOpenNow: true,
@@ -76,7 +78,8 @@ describe('FrontendService', () => {
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195,
+        price: '$195.00',
+        rawPrice: 195,
         distance: 1.2,
         fieldType: 'P95',
         isOpenNow: true,
@@ -97,7 +100,8 @@ describe('FrontendService', () => {
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195,
+        price: '$195.00',
+        rawPrice: 195,
         distance: 1.2,
         fieldType: 'P95',
         isOpenNow: true,
@@ -116,7 +120,8 @@ describe('FrontendService', () => {
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195,
+        price: '$195.00',
+        rawPrice: 195,
         distance: 1.2,
         fieldType: 'P95',
         isOpenNow: false,
@@ -135,7 +140,8 @@ describe('FrontendService', () => {
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195,
+        price: '$195.00',
+        rawPrice: 195,
         distance: 1.2,
         fieldType: 'P95',
         isOpenNow: true,
@@ -156,7 +162,8 @@ describe('FrontendService', () => {
         brand: 'BP',
         location: 'Test Location',
         address: '123 Test St',
-        price: 195,
+        price: '$195.00',
+        rawPrice: 195,
         distance: 1.2,
         fieldType: 'P95',
         isOpenNow: true,

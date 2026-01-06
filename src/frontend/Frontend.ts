@@ -30,6 +30,7 @@ Module.register('MMM-Fuel-NSW', {
     displayMode: 'list',
     alignment: 'center',
     showTankPrice: undefined,
+    priceUnit: 'cents',
   },
 
   getScripts() {

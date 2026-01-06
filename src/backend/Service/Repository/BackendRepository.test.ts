@@ -24,6 +24,7 @@ function createDefaultConfig(overrides: Partial<Config> = {}): Config {
     showLastUpdate: true,
     displayMode: 'list',
     alignment: 'center',
+    priceUnit: 'cents',
     lat: -33.8688,
     long: 151.2093,
     ...overrides,
@@ -42,6 +43,7 @@ describe('BackendRepository', () => {
     showFuelType: false,
     borderStyle: 'individual',
     showLastUpdate: false,
+    priceUnit: 'dollars',
   });
 
   const mockRefData: ReferenceData = {
@@ -128,8 +130,8 @@ describe('BackendRepository', () => {
       const result = await repository.getFuelStations(mockConfig);
 
       expect(result).toHaveLength(2);
-      expect(result[0].price).toBe(195);
-      expect(result[1].price).toBe(200);
+      expect(result[0].price).toBe('$1.9500');
+      expect(result[1].price).toBe('$2.0000');
     });
 
     test('sorts by distance ascending', async () => {
