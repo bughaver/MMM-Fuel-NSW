@@ -16,9 +16,16 @@ export class BackendMapper {
     this.timeUtils = TimeUtils;
   }
 
-  mapToFuelStation(rawStation: RawFuelStation, brands: BrandItem[], currentTime: Date = new Date()): FuelStation {
+  mapToFuelStation(
+    rawStation: RawFuelStation,
+    brands: BrandItem[],
+    currentTime: Date = new Date(),
+    showTankPrice?: number,
+  ): FuelStation {
     const todayHours = rawStation.tradinghours?.find((h) => h.Day === rawStation.Day);
     const logoUrl = BrandUtils.getLogoUrl(brands, rawStation.Brand);
+
+    const tankPrice = showTankPrice ? (rawStation.Price / 100) * showTankPrice : undefined;
 
     return {
       name: rawStation.Name,
@@ -31,6 +38,7 @@ export class BackendMapper {
       isOpenNow: todayHours?.IsOpenNow ?? false,
       isClosingSoon: this.timeUtils.isClosingSoon(todayHours, currentTime),
       logoUrl,
+      tankPrice,
     };
   }
 

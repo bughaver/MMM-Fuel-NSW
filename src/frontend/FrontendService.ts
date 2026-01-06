@@ -45,4 +45,11 @@ export default class FrontendService {
   static getFuelType(station: FuelStation): string {
     return station.fieldType;
   }
+
+  static getTankPrice(station: FuelStation): string {
+    if (station.tankPrice === undefined) {
+      return '';
+    }
+    return station.tankPrice.toLocaleString('en-AU', FrontendService.getPriceStyle());
+  }
 }

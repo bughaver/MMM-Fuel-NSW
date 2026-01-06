@@ -37,6 +37,10 @@ export class ConfigValidationUtils {
       }
     }
 
+    if (config.showTankPrice !== undefined && (config.showTankPrice <= 0 || !Number.isInteger(config.showTankPrice))) {
+      errors.push('showTankPrice must be a positive integer representing tank size in liters');
+    }
+
     return {
       isValid: errors.length === 0,
       errors,

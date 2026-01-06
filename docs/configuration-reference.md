@@ -32,31 +32,32 @@
 
 ## Complete Configuration Options
 
-| Option                    | Type      | Default     | Description                                 |
-| ------------------------- | --------- | ----------- | ------------------------------------------- |
-| `fuelType`                | `string`  | `'P95'`     | Fuel type code (see valid fuel types below) |
-| `brands`                  | `array`   | `[]`        | Array of brand names to filter by           |
-| `radius`                  | `number`  | `3`         | Search radius in kilometers                 |
-| `sortBy`                  | `string`  | `'price'`   | Sort by 'price' or 'distance'               |
-| `limit`                   | `number`  | `3`         | Maximum number of stations to display       |
-| `lat`                     | `number`  | `undefined` | Latitude for search center                  |
-| `long`                    | `number`  | `undefined` | Longitude for search center                 |
-| `bottomLeftLatitude`      | `number`  | `undefined` | Bounding box bottom-left latitude           |
-| `bottomLeftLongitude`     | `number`  | `undefined` | Bounding box bottom-left longitude          |
-| `topRightLatitude`        | `number`  | `undefined` | Bounding box top-right latitude             |
-| `topRightLongitude`       | `number`  | `undefined` | Bounding box top-right longitude            |
-| `updateIntervalInSeconds` | `number`  | `600`       | Update frequency (minimum 120)              |
-| `maxWidth`                | `string`  | `'100%'`    | CSS width for the module                    |
-| `showDistance`            | `boolean` | `true`      | Display distance to stations                |
-| `showAddress`             | `boolean` | `true`      | Display full station addresses              |
-| `showLogo`                | `boolean` | `true`      | Display brand logos                         |
-| `showOpenStatus`          | `boolean` | `true`      | Display open/closed status                  |
-| `showFuelType`            | `boolean` | `true`      | Display fuel type next to price             |
-| `showClosedStations`      | `boolean` | `true`      | Display stations that are currently closed  |
-| `alignment`               | `string`  | `'center'`  | Text alignment: 'left', 'center', 'right'   |
-| `borderStyle`             | `string`  | `'all'`     | Border style: 'none', 'individual', 'all'   |
-| `showLastUpdate`          | `boolean` | `true`      | Display last update timestamp               |
-| `displayMode`             | `string`  | `'list'`    | Display mode: 'list' or 'static'            |
+| Option                    | Type      | Default     | Description                                  |
+| ------------------------- | --------- | ----------- | -------------------------------------------- |
+| `fuelType`                | `string`  | `'P95'`     | Fuel type code (see valid fuel types below)  |
+| `brands`                  | `array`   | `[]`        | Array of brand names to filter by            |
+| `radius`                  | `number`  | `3`         | Search radius in kilometers                  |
+| `sortBy`                  | `string`  | `'price'`   | Sort by 'price' or 'distance'                |
+| `limit`                   | `number`  | `3`         | Maximum number of stations to display        |
+| `lat`                     | `number`  | `undefined` | Latitude for search center                   |
+| `long`                    | `number`  | `undefined` | Longitude for search center                  |
+| `bottomLeftLatitude`      | `number`  | `undefined` | Bounding box bottom-left latitude            |
+| `bottomLeftLongitude`     | `number`  | `undefined` | Bounding box bottom-left longitude           |
+| `topRightLatitude`        | `number`  | `undefined` | Bounding box top-right latitude              |
+| `topRightLongitude`       | `number`  | `undefined` | Bounding box top-right longitude             |
+| `updateIntervalInSeconds` | `number`  | `600`       | Update frequency (minimum 120)               |
+| `maxWidth`                | `string`  | `'100%'`    | CSS width for the module                     |
+| `showDistance`            | `boolean` | `true`      | Display distance to stations                 |
+| `showAddress`             | `boolean` | `true`      | Display full station addresses               |
+| `showLogo`                | `boolean` | `true`      | Display brand logos                          |
+| `showOpenStatus`          | `boolean` | `true`      | Display open/closed status                   |
+| `showFuelType`            | `boolean` | `true`      | Display fuel type next to price              |
+| `showClosedStations`      | `boolean` | `true`      | Display stations that are currently closed   |
+| `alignment`               | `string`  | `'center'`  | Text alignment: 'left', 'center', 'right'    |
+| `borderStyle`             | `string`  | `'all'`     | Border style: 'none', 'individual', 'all'    |
+| `showLastUpdate`          | `boolean` | `true`      | Display last update timestamp                |
+| `displayMode`             | `string`  | `'list'`    | Display mode: 'list' or 'static'             |
+| `showTankPrice`           | `number`  | `undefined` | Tank size in liters for full tank price calc |
 
 ## Location Configuration
 
@@ -180,6 +181,12 @@ config: {
     fuelType: 'DL',
     brands: [],
     sortBy: 'distance'
+}
+
+// Show tank price for 50L tank
+config: {
+    showTankPrice: 50,
+    limit: 5
 }
 ```
 

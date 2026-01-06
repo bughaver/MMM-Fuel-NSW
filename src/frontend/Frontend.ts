@@ -29,6 +29,7 @@ Module.register('MMM-Fuel-NSW', {
     showLastUpdate: true,
     displayMode: 'list',
     alignment: 'center',
+    showTankPrice: undefined,
   },
 
   getScripts() {

@@ -44,7 +44,7 @@ describe('BackendMapper', () => {
     };
 
     test('maps raw station data to domain object', async () => {
-      const result = await mapper.mapToFuelStation(rawStation, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(rawStation, mockRefData.brands.items, undefined, undefined);
 
       expect(result).toEqual({
         name: 'BP Test Station',
@@ -57,13 +57,14 @@ describe('BackendMapper', () => {
         isOpenNow: true,
         isClosingSoon: false, // EndTime has passed (test runs after 10 PM)
         logoUrl: 'bp.png',
+        tankPrice: undefined,
       });
     });
 
     test('handles stations without trading hours', async () => {
       const stationWithoutHours = { ...rawStation, tradinghours: undefined };
 
-      const result = await mapper.mapToFuelStation(stationWithoutHours, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(stationWithoutHours, mockRefData.brands.items, undefined, undefined);
 
       expect(result.isOpenNow).toBe(false);
       expect(result.isClosingSoon).toBe(false);
@@ -72,7 +73,12 @@ describe('BackendMapper', () => {
     test('handles stations with empty trading hours array', async () => {
       const stationWithEmptyHours = { ...rawStation, tradinghours: [] };
 
-      const result = await mapper.mapToFuelStation(stationWithEmptyHours, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(
+        stationWithEmptyHours,
+        mockRefData.brands.items,
+        undefined,
+        undefined,
+      );
 
       expect(result.isOpenNow).toBe(false);
       expect(result.isClosingSoon).toBe(false);
@@ -81,7 +87,12 @@ describe('BackendMapper', () => {
     test('returns undefined logoUrl for unknown brands', async () => {
       const stationWithUnknownBrand = { ...rawStation, Brand: 'Unknown Brand' };
 
-      const result = await mapper.mapToFuelStation(stationWithUnknownBrand, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(
+        stationWithUnknownBrand,
+        mockRefData.brands.items,
+        undefined,
+        undefined,
+      );
 
       expect(result.logoUrl).toBeUndefined();
     });
@@ -98,7 +109,7 @@ describe('BackendMapper', () => {
         tradinghours: [],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.location).toBe('Bonnyrigg');
     });
 
@@ -114,7 +125,7 @@ describe('BackendMapper', () => {
         tradinghours: [],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.location).toBe('West Botany North');
     });
 
@@ -130,7 +141,7 @@ describe('BackendMapper', () => {
         tradinghours: [],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.location).toBe('Chippendale');
     });
 
@@ -153,7 +164,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
 
       expect(result.location).toBe('Chippendale');
       expect(result.name).toBe('Budget Petrol Chippendale');
@@ -179,7 +190,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
 
       expect(result.location).toBe('Trundle');
       expect(result.name).toBe('Trundle Fuel');
@@ -198,7 +209,7 @@ describe('BackendMapper', () => {
         tradinghours: [],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.location).toBe('Test Station');
     });
   });
@@ -227,7 +238,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, mockCurrentTime);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, mockCurrentTime, undefined);
       expect(result.isClosingSoon).toBe(true);
       expect(result.isOpenNow).toBe(true);
     });
@@ -244,7 +255,7 @@ describe('BackendMapper', () => {
         tradinghours: [],
       } as RawFuelStation;
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.brand).toBeUndefined();
       expect(result.logoUrl).toBeUndefined();
     });
@@ -272,7 +283,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, mockCurrentTime);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, mockCurrentTime, undefined);
       expect(result.isClosingSoon).toBe(false);
       expect(result.isOpenNow).toBe(true);
     });
@@ -300,7 +311,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, mockCurrentTime);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, mockCurrentTime, undefined);
       expect(result.isClosingSoon).toBe(false);
       expect(result.isOpenNow).toBe(false);
     });
@@ -325,7 +336,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.isClosingSoon).toBe(false);
       expect(result.isOpenNow).toBe(false);
     });
@@ -349,7 +360,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, undefined, undefined);
       expect(result.isClosingSoon).toBe(false);
       expect(result.isOpenNow).toBe(true);
     });
@@ -376,7 +387,7 @@ describe('BackendMapper', () => {
         ],
       };
 
-      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, explicitCurrentTime);
+      const result = await mapper.mapToFuelStation(station, mockRefData.brands.items, explicitCurrentTime, undefined);
       expect(result.isClosingSoon).toBe(false);
       expect(result.isOpenNow).toBe(true);
     });

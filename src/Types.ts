@@ -23,6 +23,7 @@ export type Config = {
   showLastUpdate: boolean;
   displayMode: 'list' | 'static';
   alignment: 'left' | 'center' | 'right';
+  showTankPrice?: number;
 };
 
 export type FuelStation = {
@@ -36,6 +37,7 @@ export type FuelStation = {
   isOpenNow: boolean;
   isClosingSoon: boolean;
   logoUrl?: string;
+  tankPrice?: number;
 };
 
 export type State = {

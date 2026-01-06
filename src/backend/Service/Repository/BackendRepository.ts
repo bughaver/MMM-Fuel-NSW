@@ -21,7 +21,7 @@ export class BackendRepository {
     const rawStations = await this.fetchFuelStations(processedConfig);
 
     let stations = rawStations.map((raw: RawFuelStation) =>
-      this.backendMapper.mapToFuelStation(raw, referenceData.brands.items),
+      this.backendMapper.mapToFuelStation(raw, referenceData.brands.items, undefined, processedConfig.showTankPrice),
     );
 
     stations = this.applyFilters(stations, processedConfig);
