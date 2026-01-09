@@ -11,7 +11,7 @@
           </td>
           {% endif %}
           <td class="fuel-static-station-location{% if station.isClosingSoon %} fuel-static-station-closing-soon{% elif not station.isOpenNow %} fuel-static-station-closed{% endif %}">{{ station.location }}</td>
-          <td class="fuel-static-price{% if station.isClosingSoon %} closing-soon{% elif not station.isOpenNow %} closed{% endif %}">{{ utils.getPrice(station) }}</td>
+          <td class="fuel-static-price{% if config.priceHighlight %} fuel-price-highlight{% endif %}">{{ utils.getPrice(station) }}</td>
           {% if config.showTankPrice %}
           <td class="fuel-static-tank-price">{{ utils.getTankPrice(station) }}</td>
           {% endif %}

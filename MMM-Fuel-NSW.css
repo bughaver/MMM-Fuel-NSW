@@ -109,6 +109,11 @@
   color: var(--color-primary);
 }
 
+.fuel-list-tank-price {
+  font-size: var(--font-size-lg);
+  color: var(--color-muted);
+}
+
 .fuel-list-type {
   font-size: var(--font-size-lg);
   color: var(--color-muted);
@@ -239,6 +244,11 @@
 .MMM-Fuel-NSW .fuel-static.table th,
 td {
   padding: var(--padding-zero) var(--padding-zero);
+}
+
+/* ===== PRICE HIGHLIGHT ===== */
+.fuel-price-highlight {
+  color: var(--color-primary);
 }
 
 /* ===== STATIC STATION STATUS COLORS ===== */

@@ -9,12 +9,12 @@
           <span class="fuel-station-name">{{ utils.getStationName(station) }}</span>
         </div>
         <div class="fuel-list-details">
-          <span class="fuel-list-price">
+          <span class="fuel-list-price{% if config.priceHighlight %} fuel-price-highlight{% endif %}">
             {{ utils.getPrice(station) }}
-            {% if config.showTankPrice %}
-            ({{ utils.getTankPrice(station) }})
-            {% endif %}
           </span>
+          {% if config.showTankPrice %}
+          <span class="fuel-list-tank-price">({{ utils.getTankPrice(station) }})</span>
+          {% endif %}
           {% if config.showFuelType %}
             <span class="fuel-list-type">{{ utils.getFuelType(station) }}</span>
           {% endif %}
