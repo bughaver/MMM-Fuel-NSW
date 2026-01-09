@@ -18,7 +18,6 @@ Module.register('MMM-Fuel-NSW', {
     lat: -33.8688, // Sydney coordinates as example
     long: 151.2093,
     updateIntervalInSeconds: 600,
-    maxWidth: '100%',
     showDistance: true,
     showAddress: true,
     showLogo: true,
@@ -31,6 +30,7 @@ Module.register('MMM-Fuel-NSW', {
     alignment: 'center',
     showTankPrice: undefined,
     priceUnit: 'cents',
+    priceHighlight: true,
   },
 
   getScripts() {

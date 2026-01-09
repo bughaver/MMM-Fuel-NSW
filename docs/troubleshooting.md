@@ -160,7 +160,6 @@
 
    ```javascript
    config: {
-       maxWidth: "100%",     // Reset width
        borderStyle: "all",   // Reset borders
        alignment: "center"   // Reset alignment
    }

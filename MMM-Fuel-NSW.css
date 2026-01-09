@@ -92,6 +92,7 @@
 .fuel-station-name {
   font-weight: bold;
   font-size: var(--font-size-lg);
+  white-space: nowrap;
 }
 
 /* List mode details */
@@ -106,6 +107,11 @@
   font-size: var(--font-size-lg);
   font-weight: bold;
   color: var(--color-primary);
+}
+
+.fuel-list-tank-price {
+  font-size: var(--font-size-lg);
+  color: var(--color-muted);
 }
 
 .fuel-list-type {
@@ -240,13 +246,16 @@ td {
   padding: var(--padding-zero) var(--padding-zero);
 }
 
-/* ===== PRICE STATUS COLORS ===== */
-.fuel-list-price.closed,
-.fuel-static-price.closed {
+/* ===== PRICE HIGHLIGHT ===== */
+.fuel-price-highlight {
+  color: var(--color-primary);
+}
+
+/* ===== STATIC STATION STATUS COLORS ===== */
+.fuel-static-station-closed {
   color: var(--status-closed);
 }
 
-.fuel-list-price.closing-soon,
-.fuel-static-price.closing-soon {
+.fuel-static-station-closing-soon {
   color: var(--status-closing-soon);
 }

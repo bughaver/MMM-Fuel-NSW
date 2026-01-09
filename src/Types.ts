@@ -12,7 +12,6 @@ export type Config = {
   topRightLatitude?: number;
   topRightLongitude?: number;
   updateIntervalInSeconds: number;
-  maxWidth: string;
   showDistance: boolean;
   showAddress: boolean;
   showLogo: boolean;

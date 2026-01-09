@@ -13,7 +13,6 @@ function createDefaultConfig(overrides: Partial<Config> = {}): Config {
     limit: 3,
     distance: 10,
     updateIntervalInSeconds: 600,
-    maxWidth: '100%',
     showDistance: true,
     showAddress: true,
     showLogo: true,
