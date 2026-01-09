@@ -74,7 +74,91 @@ describe('ConfigValidationUtils', () => {
       const result = await ConfigValidationUtils.validateConfigWithReferenceData(config, mockReferenceData);
 
       expect(result.isValid).toBe(false);
-      expect(result.errors).toContain('Invalid fuel type: INVALID');
+      expect(result.errors).toContain('Invalid fuel types: INVALID');
+    });
+
+    test('validates valid fuel type array successfully', async () => {
+      const config: Config = {
+        fuelType: ['P95', 'P98'],
+        brands: ['BP'],
+        radius: 3,
+        sortBy: 'price',
+        limit: 5,
+        distance: 10,
+        lat: -33.8688,
+        long: 151.2093,
+        updateIntervalInSeconds: 600,
+        showDistance: true,
+        showAddress: false,
+        showLogo: true,
+        showOpenStatus: true,
+        showFuelType: false,
+        borderStyle: 'individual',
+        showLastUpdate: false,
+        displayMode: 'list',
+        alignment: 'center',
+      };
+
+      const result = await ConfigValidationUtils.validateConfigWithReferenceData(config, mockReferenceData);
+
+      expect(result.isValid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    test('returns error for array with some invalid fuel types', async () => {
+      const config: Config = {
+        fuelType: ['P95', 'INVALID', 'P98'],
+        brands: [],
+        radius: 3,
+        sortBy: 'price',
+        limit: 5,
+        distance: 10,
+        lat: -33.8688,
+        long: 151.2093,
+        updateIntervalInSeconds: 600,
+        showDistance: true,
+        showAddress: false,
+        showLogo: true,
+        showOpenStatus: true,
+        showFuelType: false,
+        borderStyle: 'individual',
+        showLastUpdate: false,
+        displayMode: 'list',
+        alignment: 'center',
+      };
+
+      const result = await ConfigValidationUtils.validateConfigWithReferenceData(config, mockReferenceData);
+
+      expect(result.isValid).toBe(false);
+      expect(result.errors).toContain('Invalid fuel types: INVALID');
+    });
+
+    test('returns error for array with all invalid fuel types', async () => {
+      const config: Config = {
+        fuelType: ['INVALID1', 'INVALID2'],
+        brands: [],
+        radius: 3,
+        sortBy: 'price',
+        limit: 5,
+        distance: 10,
+        lat: -33.8688,
+        long: 151.2093,
+        updateIntervalInSeconds: 600,
+        showDistance: true,
+        showAddress: false,
+        showLogo: true,
+        showOpenStatus: true,
+        showFuelType: false,
+        borderStyle: 'individual',
+        showLastUpdate: false,
+        displayMode: 'list',
+        alignment: 'center',
+      };
+
+      const result = await ConfigValidationUtils.validateConfigWithReferenceData(config, mockReferenceData);
+
+      expect(result.isValid).toBe(false);
+      expect(result.errors).toContain('Invalid fuel types: INVALID1, INVALID2');
     });
 
     test('returns error for invalid brand', async () => {
@@ -130,7 +214,7 @@ describe('ConfigValidationUtils', () => {
       const result = await ConfigValidationUtils.validateConfigWithReferenceData(config, mockReferenceData);
 
       expect(result.isValid).toBe(false);
-      expect(result.errors).toContain('Invalid fuel type: Diesel');
+      expect(result.errors).toContain('Invalid fuel types: Diesel');
     });
 
     test('returns error for inactive brand', async () => {

@@ -241,6 +241,24 @@ describe('BackendRepository', () => {
         expect.any(Object),
       );
     });
+
+    test('makes multiple API calls when fuel type is array', async () => {
+      const configWithFuelTypeArray = { ...mockConfig, fuelType: ['P95', 'P98'] };
+
+      await repository.getFuelStations(configWithFuelTypeArray);
+
+      expect(mockFuelApiConnector.fetchFuelStationsByLocation).toHaveBeenCalledTimes(2);
+      expect(mockFuelApiConnector.fetchFuelStationsByLocation).toHaveBeenCalledWith(
+        'P95',
+        ['SelectAll'],
+        expect.any(Object),
+      );
+      expect(mockFuelApiConnector.fetchFuelStationsByLocation).toHaveBeenCalledWith(
+        'P98',
+        ['SelectAll'],
+        expect.any(Object),
+      );
+    });
   });
 
   describe('error handling', () => {

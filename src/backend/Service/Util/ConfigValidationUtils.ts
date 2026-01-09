@@ -24,8 +24,11 @@ export class ConfigValidationUtils {
 
     const validFuelTypes = new Set(referenceData.fueltypes.items.filter((ft) => ft.isactive).map((ft) => ft.code));
 
-    if (!validFuelTypes.has(config.fuelType)) {
-      errors.push(`Invalid fuel type: ${config.fuelType}`);
+    const fuelTypesToValidate = Array.isArray(config.fuelType) ? config.fuelType : [config.fuelType];
+    const invalidFuelTypes = fuelTypesToValidate.filter((fuelType) => !validFuelTypes.has(fuelType));
+
+    if (invalidFuelTypes.length > 0) {
+      errors.push(`Invalid fuel types: ${invalidFuelTypes.join(', ')}`);
     }
 
     if (config.brands.length > 0 && !config.brands.includes('SelectAll')) {

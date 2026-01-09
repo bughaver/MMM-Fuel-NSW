@@ -48,7 +48,18 @@ export class BackendRepository {
   private async fetchFuelStations(config: Config): Promise<RawFuelStation[]> {
     const boundingBox = BoundingBoxUtils.calculateBoundingBox(config);
 
-    return await this.fuelApiConnector.fetchFuelStationsByLocation(config.fuelType!, config.brands, boundingBox);
+    if (Array.isArray(config.fuelType)) {
+      // Make multiple API calls for each fuel type and combine results
+      const allStations: RawFuelStation[] = [];
+      for (const fuelType of config.fuelType) {
+        const stations = await this.fuelApiConnector.fetchFuelStationsByLocation(fuelType, config.brands, boundingBox);
+        allStations.push(...stations);
+      }
+      return allStations;
+    } else {
+      // Single fuel type
+      return await this.fuelApiConnector.fetchFuelStationsByLocation(config.fuelType, config.brands, boundingBox);
+    }
   }
 
   private applyFilters(stations: FuelStation[], config: Config): FuelStation[] {

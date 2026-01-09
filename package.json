@@ -1,6 +1,6 @@
 {
   "name": "mmm-fuel-nsw",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A MagicMirror² module to display fuel prices from New South Wales, Australia.",
   "main": "MMM-Fuel-NSW.js",
   "repository": {
