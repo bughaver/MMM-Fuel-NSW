@@ -92,6 +92,7 @@
 .fuel-station-name {
   font-weight: bold;
   font-size: var(--font-size-lg);
+  white-space: nowrap;
 }
 
 /* List mode details */
