@@ -241,13 +241,11 @@ td {
   padding: var(--padding-zero) var(--padding-zero);
 }
 
-/* ===== PRICE STATUS COLORS ===== */
-.fuel-list-price.closed,
-.fuel-static-price.closed {
+/* ===== STATIC STATION STATUS COLORS ===== */
+.fuel-static-station-closed {
   color: var(--status-closed);
 }
 
-.fuel-list-price.closing-soon,
-.fuel-static-price.closing-soon {
+.fuel-static-station-closing-soon {
   color: var(--status-closing-soon);
 }
