@@ -19,7 +19,6 @@ describe('BackendService', () => {
     lat: -33.93993412910857,
     long: 151.1270892114922,
     updateIntervalInSeconds: 600,
-    maxWidth: '100%',
     showDistance: true,
     showAddress: false,
     showLogo: true,

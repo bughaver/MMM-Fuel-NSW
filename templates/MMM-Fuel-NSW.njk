@@ -1,7 +1,7 @@
 {% import "templates/StaticDisplay.njk" as staticDisplay with context %}
 {% import "templates/ListDisplay.njk" as listDisplay with context %}
 {% if stations.length > 0 %}
-  <div class="normal medium fuel-wrapper{% if config.displayMode == "static" %} fuel-static{% endif %} fuel-wrapper-{{config.borderStyle}}" style="max-width: {{config.maxWidth}};">
+  <div class="normal medium fuel-wrapper{% if config.displayMode == "static" %} fuel-static{% endif %} fuel-wrapper-{{config.borderStyle}}">
     {% if config.displayMode == "static" %}
       {{ staticDisplay.render() }}
     {% else %}

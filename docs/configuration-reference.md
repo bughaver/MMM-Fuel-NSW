@@ -46,7 +46,6 @@
 | `topRightLatitude`        | `number`  | `undefined` | Bounding box top-right latitude              |
 | `topRightLongitude`       | `number`  | `undefined` | Bounding box top-right longitude             |
 | `updateIntervalInSeconds` | `number`  | `600`       | Update frequency (minimum 120)               |
-| `maxWidth`                | `string`  | `'100%'`    | CSS width for the module                     |
 | `showDistance`            | `boolean` | `true`      | Display distance to stations                 |
 | `showAddress`             | `boolean` | `true`      | Display full station addresses               |
 | `showLogo`                | `boolean` | `true`      | Display brand logos                          |
@@ -161,7 +160,6 @@ config: {
 
 ```javascript
 config: {
-    maxWidth: '600px',
     alignment: 'left',
     borderStyle: 'none',
     showLastUpdate: false
