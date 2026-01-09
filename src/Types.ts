@@ -1,5 +1,5 @@
 export type Config = {
-  fuelType: string;
+  fuelType: string | string[];
   brands: string[];
   radius: number;
   sortBy: 'price' | 'distance';
